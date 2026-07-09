@@ -11,7 +11,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -20,6 +20,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a hello script
-        run: echo Hello, GitHub Actions!
+      # Installs the dependencies from requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Runs converage test using pytest
+      - name: Run coverage test
+        run: python -m pytest --cov=myapp tests > test_results.txt
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v7
+        with:
+          name: test_results
+          path: ./test_results.txt
+
+      # Checks coverage. If < 70% - failure
+      - name: Check coverage
+        run: |
+          cat test_results.txt | \
+          grep ^TOTAL | \
+          grep '[0-9]+' | \
+          tail -n 1 | \
+          {read cov; ((cov >= 70)) || exit 1}
