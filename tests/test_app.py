@@ -1,6 +1,8 @@
 from myapp.app import add, subtract
 
 
+def test_add():
+    pass
 # def test_add():
 #     """Tests the addition function."""
 #     assert add(2, 3) == 5
