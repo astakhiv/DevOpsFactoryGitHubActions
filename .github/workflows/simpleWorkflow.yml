@@ -37,8 +37,7 @@ jobs:
       # Checks coverage. If < 70% - failure
       - name: Check coverage
         run: |
-          cat test_results.txt | \
-          grep ^TOTAL | \
-          grep '[0-9]+' | \
-          tail -n 1 | \
-          {read cov; ((cov >= 70)) || exit 1}
+          cov=$(cat test_results.txt | grep ^TOTAL | grep -oE '[0-9]+' | tail -n 1)
+          if [ "$cov" -lt 70 ]; then
+            exit 1
+          fi
