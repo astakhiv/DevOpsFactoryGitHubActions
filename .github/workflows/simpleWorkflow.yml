@@ -66,9 +66,9 @@ jobs:
 
       # Commit and Push changes
       - name: Commit and Push changes
-        run: |
-          git config --local user.email "github-actions[bot]@://github.com"
-          git config --local user.name "github-actions[bot]"
-          git add . 
-          git commit -m "auto_edit: add badge to README.md"
-          git push origin main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit-message: "auto_edit: add a badge to README.md if not there"
+          file-pattern: "README.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
