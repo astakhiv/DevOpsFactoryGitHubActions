@@ -61,14 +61,14 @@ jobs:
 
       # Adds a badge to README.md file if there is no
       - name: Add a badge to the README.md file if there is no
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
           grep '![Build status](https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md || sed -i '1i ![Build status](https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md
 
+      # Commit and Push changes
+      - name: Commit and Push changes
+        run: |
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
-
-          git add .
+          git add . 
           git commit -m "auto_edit: add badge to README.md"
           git push
