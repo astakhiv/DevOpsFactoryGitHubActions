@@ -62,7 +62,7 @@ jobs:
       # Adds a badge to README.md file if there is no
       - name: Add a badge to the README.md file if there is no
         run: | 
-          grep '![Build status](https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md || sed -i '1i ![Build status](https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md
+          grep '(https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md || sed -i '1i ![Build status](https://github.com/astakhiv/DevOpsFactoryGitHubActions/actions/workflows/simpleWorkflow.yml/badge.svg)' README.md
 
       # Commit and Push changes
       - name: Commit and Push changes
