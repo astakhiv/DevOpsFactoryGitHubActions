@@ -71,4 +71,4 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add . 
           git commit -m "auto_edit: add badge to README.md"
-          git push
+          git push origin HEAD:${{ github.ref_name }} 
